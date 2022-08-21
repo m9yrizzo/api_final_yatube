@@ -22,8 +22,11 @@ class Post(models.Model):
         upload_to='posts/', null=True, blank=True)
     group = models.ForeignKey(
         Group, on_delete=models.CASCADE,
-        related_name="posts", blank=True, null=True
+        related_name='posts', blank=True, null=True
     )
+
+    class Meta:
+        ordering = ['pub_date']
 
     def __str__(self):
         return self.text
@@ -37,6 +40,9 @@ class Comment(models.Model):
     text = models.TextField()
     created = models.DateTimeField(
         'Дата добавления', auto_now_add=True, db_index=True)
+
+    class Meta:
+        ordering = ['created']
 
 
 class Follow(models.Model):
